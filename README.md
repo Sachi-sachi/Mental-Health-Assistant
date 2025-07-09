@@ -1,0 +1,6 @@
+Mental health support is a growing concern worldwide, yet accessible and personalized assistance remains limited. This paper presents RAG Care, a conversational mental wellness assistant focused on depression-related queries, which leverages Retrieval-Augmented Generation (RAG) to create accurate and empathetic responses. The system 
+integrates a knowledge base of counseling questions and answers (the CounselChat dataset) with large language models (specifically a custom LLaMA3 based 8B model) to retrieve relevant expert advice and 
+generate helpful answers in real-time. Key components of the methodology include data preprocessing (filtering and organizing Q&A pairs on depression), vector embedding of texts, and a hybrid search 
+mechanism using Elasticsearch for high-relevance document retrieval. We evaluate the system using retrieval metrics like Hit Rate and Mean Reciprocal Rank (MRR) to compare different strategies. 
+Experimental results show that augmenting the LLM with retrieved knowledge substantially improves response relevance (e.g., vector search achieves a Hit@5 of ~78.9% vs ~50.4% with baseline lexical 
+search). The proposed RAG-based assistant demonstrates the potential for delivering reliable, up to-date mental health guidance at scale.
