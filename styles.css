@@ -1,0 +1,421 @@
+/* General Page Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom right, #f8e1e1, #e1f0f8);
+}
+
+/* Chat Container */
+.chat-container {
+    width: 800px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    text-align: center;
+    
+}
+
+/* Title */
+h1 {
+    background: #DEA193;
+    color: white;
+    padding: 15px;
+    margin: 0;
+}
+
+/* Chatbox */
+#chatbox {
+    height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Messages */
+.message {
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 8px;
+    line-height: 1.4;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* User Message */
+.user {
+    background: #dcf8c6;
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* Bot Message */
+.bot {
+    background: #f1f1f1;
+    align-self: flex-start;
+    text-align: left;
+}
+
+/* Sender Label */
+.message span {
+    font-weight: bold;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+/* Input Area */
+.input-container {
+    display: flex;
+    padding: 10px;
+    background: #eee;
+    border-top: 1px solid #ccc;
+}
+
+.input-container input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-container button {
+    background: #DEA193;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.input-container button:hover {
+    background: #DEA193;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Clear Button */
+.clear-btn {
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.clear-btn:hover {
+    background: #c9302c;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: absolute;
+    top: 15%;
+    right: 10px;
+    width: 250px;
+    background: #f4deee;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Quote Section */
+.quote-container {
+    font-style: italic;
+    color: #555;
+    text-align: center;
+}
+
+/* Interactive Widgets */
+.widget-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.widget-btn {
+    background-color: #DEA193;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.widget-btn:hover {
+    background-color: #D88D6A;
+}
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 480px) {
+    .chat-container {
+        width: 90%;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        margin-top: 20px;
+    }
+}
+
+/* Breath Animation Modal */
+
+.breath-animation-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+.breath-animation-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.breath-animation-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.line {
+    height: 5px;
+    background-color: #e095a6;
+    width: 0;
+    transition: width 2s ease-in-out;
+}
+
+.inhale {
+    background-color: #e095a6;
+}
+
+.hold {
+    background-color: #e095a6;
+}
+
+.exhale {
+    background-color: #e095a6;
+}
+
+.close-breathing {
+    display: none; /* initially hidden */
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #d799a7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+}
+
+
+.close-breathing:hover {
+    background: #c6868a;
+}
+
+  
+  /* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #d946ef, #9333ea); /* Pink to purple gradient */
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.modal-button:hover {
+    background: linear-gradient(to right, #9333ea, #d946ef);
+}
+
+
+.modal-content {
+    background: linear-gradient(to right, #f9cedf, #e0d4f7);
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.4s ease;
+}
+
+.modal-content h2 {
+    color: #7c3aed;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    color: #333;
+    font-size: 16px;
+    margin-top: 0;
+}
+
+
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+.top-left-box {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #e7adad; /* Soft light blue background */
+    padding: 10px 12px; /* Reduced padding for a smaller box */
+    border-radius: 6px; /* Smaller border radius for a tighter look */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Smaller shadow */
+    font-size: 16px; /* Smaller font size */
+    color: #2c3e50;  /* Dark grey text for better contrast */
+    font-weight: bold;
+    font-family: 'Verdana', sans-serif;  /* Clean, readable font */
+    letter-spacing: 0.5px;
+    text-align: center;
+    animation: slideIn 1s ease-out;
+    width: auto;  /* Auto width to fit the text */
+    max-width: 200px; /* Maximum width to prevent the box from becoming too wide */
+}
+
+.top-left-box p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Fun animation for text */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Soft hover effect */
+.top-left-box:hover {
+    background-color: #e89f9f;  /* Lighter blue when hovered */
+    transform: scale(1.05);  /* Slightly enlarge the box */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Subtle text shadow for readability */
+.top-left-box p {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#helpline-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  #helpline-panel {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background-color: white;
+    color: #333;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    width: 250px;
+  }
+  
+  #helpline-panel h4 {
+    margin-top: 0;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  #helpline-panel ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  #helpline-panel li {
+    padding: 4px 0;
+    font-size: 14px;
+  }
+  

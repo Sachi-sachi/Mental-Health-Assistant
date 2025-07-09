@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Wellness Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="chat-container">
+    <h1>Mental Wellness Assistant</h1>
+    <div id="chatbox"></div>
+    
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+        <button class="clear-btn" onclick="clearChat()">Clear Chat</button>
+    </div>
+</div>
+
+
+<!-- Inspirational Quotes Section -->
+<div class="sidebar">
+    <div class="quote-container">
+        <h2>Inspirational Quote</h2>
+        <p id="quote">"You are stronger than you think."</p>
+    </div>
+
+    <!-- Interactive Widgets -->
+    <div class="widget-container">
+        <button class="widget-btn" onclick="takeDeepBreath()">Take a Deep Breath</button>
+        <button class="widget-btn" onclick="wellnessTip()">Wellness Tip of the Day</button>
+    </div>
+</div>
+
+<div class="breath-animation-wrapper" id="breathAnimationModal" style="display: none;">
+    
+    <div class="breath-animation-modal-content">
+        <div class="breath-animation-horizontal">
+            <div class="circle inhale">Inhale</div>
+            <div class="line" id="line1"></div>
+            <div class="circle hold">Hold</div>
+            <div class="line" id="line2"></div>
+            <div class="circle exhale">Exhale</div>
+        </div>
+        <button class="close-breathing" onclick="closeBreathAnimation()">Close</button>
+    </div>
+</div>
+  
+  
+  <div id="wellnessModal" class="modal">
+    <div class="modal-content">
+      <h2>Wellness Tip of the Day</h2>
+      <p id="tipText"></p>
+      <button class="modal-button" onclick="closeModal()">Got it</button>
+    </div>
+  </div>
+  
+  <div class="top-left-box">
+    <p>EDI SEM : 2024-2025</p>
+    <br>
+    <p>TY-CS D: 68</p>
+    <br>
+    <p>Presented by:</p>
+    <br>
+    <p>Renuka Pawar</p>
+    <p>Revati Shimpi</p>
+    <p>Rushabh Rode</p>
+    <p>Sachi Chakrabarti</p>
+</div>
+
+<div id="helpline-box" onclick="toggleHelpline()">
+    Helpline
+  </div>
+  
+  <div id="helpline-panel">
+    <h4>Support Numbers</h4>
+    <ul>
+      <li>📞 National Helpline: 1800-599-0019</li>
+      <li>📞 Mental Health Helpline: 9152987821</li>
+      <li>📞 iCall: +91 9152987821</li>
+      <li>📞 AASRA: 91-9820466726</li>
+    </ul>
+  </div>
+  
+
+
+<script>
+    // Send message function
+    async function sendMessage() {
+        let inputField = document.getElementById("userInput");
+        let message = inputField.value.trim();
+        if (!message) return;
+        
+        inputField.value = "";
+        let chatbox = document.getElementById("chatbox");
+        
+        // Add user message
+        chatbox.innerHTML += `<div class="message user"><span>You:</span> ${message}</div>`;
+        chatbox.scrollTop = chatbox.scrollHeight; 
+
+        // Fetch response from backend
+        let response = await fetch("http://127.0.0.1:5000/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question: message })
+        });
+
+        let data = await response.json();
+        
+        // Add bot response with animation
+        setTimeout(() => {
+            chatbox.innerHTML += `<div class="message bot"><span>Bot:</span> ${data.response}</div>`;
+            chatbox.scrollTop = chatbox.scrollHeight; 
+        }, 600);
+    }
+
+    // Handle Enter key press
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+
+    // Clear chat function
+    function clearChat() {
+        document.getElementById("chatbox").innerHTML = "";  // Clears all messages
+    }
+
+let breathCount = 0;
+
+function takeDeepBreath() {
+    const wrapper = document.getElementById("breathAnimationModal");
+    const inhale = wrapper.querySelector(".inhale");
+    const hold = wrapper.querySelector(".hold");
+    const exhale = wrapper.querySelector(".exhale");
+    const line1 = document.getElementById("line1");
+    const line2 = document.getElementById("line2");
+    const closeButton = wrapper.querySelector(".close-breathing");
+
+    wrapper.style.display = "flex";
+    closeButton.style.display = "none"; // Hide close button initially
+
+    // Reset for each cycle
+    inhale.style.opacity = 0;
+    hold.style.opacity = 0;
+    exhale.style.opacity = 0;
+    line1.style.width = "0";
+    line2.style.width = "0";
+
+    // Animate one full cycle (about 9 seconds total)
+    setTimeout(() => inhale.style.opacity = 1, 500);
+    setTimeout(() => line1.style.width = "100px", 2000);
+    setTimeout(() => hold.style.opacity = 1, 3000);
+    setTimeout(() => line2.style.width = "100px", 5000);
+    setTimeout(() => exhale.style.opacity = 1, 6000);
+
+    breathCount++;
+
+    if (breathCount < 3) {
+        setTimeout(() => takeDeepBreath(), 9000);
+    } else {
+        // Show Close button after final round
+        setTimeout(() => {
+            closeButton.style.display = "inline-block";
+            breathCount = 0; // reset counter for next time
+        }, 9000);
+    }
+}
+
+function closeBreathAnimation() {
+    document.getElementById("breathAnimationModal").style.display = "none";
+}
+
+function toggleHelpline() {
+  const panel = document.getElementById("helpline-panel");
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+}
+
+
+
+function wellnessTip() {
+    const tips = [
+    "🌿 Take a walk outside and get some fresh air. 🚶‍♀️🌳",
+    "💧 Drink a glass of water to stay hydrated. 🥤💦",
+    "🎶 Listen to calming music for relaxation. 🎧🎵",
+    "🧘‍♂️ Practice deep breathing for 5 minutes. 🌬️🧘‍♀️",
+    "📚 Read a book for 15 minutes to unwind. 📖✨",
+    "🌞 Step into the sunlight and soak up some Vitamin D. 🌅☀️",
+    "🌸 Jot down 3 things you're grateful for today. 📝💖",
+    "🍎 Have a healthy snack, like fruits or nuts. 🍓🥜",
+    "😴 Get at least 7 hours of sleep for a restful night. 🛌💤",
+    "🤸‍♀️ Stretch your body and relieve tension. 🙆‍♂️🧘‍♀️",
+    "💖 Give someone a compliment, it will boost your mood! 😊💬"
+];
+
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    document.getElementById("tipText").textContent = randomTip;
+    document.getElementById("wellnessModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("wellnessModal").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
